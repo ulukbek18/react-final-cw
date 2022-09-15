@@ -82,43 +82,45 @@ export const QuestionList = () => {
                     </Col>
                 </Row>
             </div>
-            <span >Ответов на вопрос может быть больше чем один</span>
+            <div className='wrapper-upper'>
+            <span  >Ответов на вопрос может быть больше чем один</span>
+            </div>
             <div>
                 <form onSubmit={handleSubmit} >
                     {questions.map(question => {
                         return question.multiple ?
 
-                            <div key={question.id}>
-                                <h2>{question.question}</h2>
+                            <div key={question.id} className='wrapper'>
+                                <h2 className='question-text'>{question.question}</h2>
                                 <div className='input-wrapper'>
                                     <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[0].correct}></input>
-                                    <label htmlFor="html"><b>Option 1:</b>   {question.answers[0].answer}</label>
+                                    <label  className='answer-text'htmlFor="html"><b >Option 1:</b>   {question.answers[0].answer}</label>
 
                                     <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[1].correct} />
-                                    <label htmlFor="css"><b>Option 2:</b>   {question.answers[1].answer}</label>
+                                    <label className='answer-text' htmlFor="css"><b>Option 2:</b>   {question.answers[1].answer}</label>
 
                                     <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[2].correct} />
-                                    <label htmlFor="javascript"><b>Option 3:</b>   {question.answers[2].answer}</label>
+                                    <label className='answer-text' htmlFor="javascript"><b>Option 3:</b>   {question.answers[2].answer}</label>
 
                                     <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[3].correct} />
-                                    <label htmlFor="javascript"><b>Option 4:</b>   {question.answers[3].answer}</label>
+                                    <label className='answer-text' htmlFor="javascript"><b>Option 4:</b>   {question.answers[3].answer}</label>
                                 </div>
                             </div>
                             :
-                            <div key={question.id}>
-                                <h2>{question.question}</h2>
+                            <div key={question.id} className='wrapper'>
+                                <h2 className='question-text'>{question.question}</h2>
                                 <div className='input-wrapper'>
                                     <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[0].correct}></input>
-                                    <label htmlFor="html"><b>Option 1:</b>   {question.answers[0].answer}</label>
+                                    <label className='answer-text' htmlFor="html"><b>Option 1:</b>   {question.answers[0].answer}</label>
 
                                     <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[1].correct} />
-                                    <label htmlFor="css"><b>Option 2:</b>   {question.answers[1].answer}</label>
+                                    <label className='answer-text' htmlFor="css"><b>Option 2:</b>   {question.answers[1].answer}</label>
 
                                     <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[2].correct} />
-                                    <label htmlFor="javascript"><b>Option 3:</b>   {question.answers[2].answer}</label>
+                                    <label className='answer-text' htmlFor="javascript"><b>Option 3:</b>   {question.answers[2].answer}</label>
 
                                     <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[3].correct} />
-                                    <label htmlFor="javascript"><b>Option 4:</b>   {question.answers[3].answer}</label>
+                                    <label className='answer-text' htmlFor="javascript"><b>Option 4:</b>   {question.answers[3].answer}</label>
                                 </div>
                             </div>
                     })}
