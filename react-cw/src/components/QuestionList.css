@@ -1,0 +1,16 @@
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+    
+}
+.button{
+    padding: 20px;
+    margin-left: 200px;
+    width: 300px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.button:hover{
+  opacity: 0.7;
+}
