@@ -70,6 +70,8 @@ export const QuestionList = () => {
         setIsModalOpen(false);
     };
 
+
+
     console.log('questions', questions)
     const title = timeOut? 'Ваше время истекло' : 'Результат'
     console.log('render')
@@ -127,9 +129,11 @@ export const QuestionList = () => {
                     <button className='button' type="submit" onClick={showModal}>Завершить тест</button>
 
                     <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                        <p>Уважаемый: <b>{newUserName}</b></p>
-                        <p>Ваш результат:{correctAnswers} из {questions.length}</p>
-                        <p>Успешность теста:{Math.floor((correctAnswers / questions.length) * 100)}%</p>
+                        <p><strong>Уважаемый: {newUserName}</strong></p>
+                        <p><strong>Ваш результат:{correctAnswers} из {questions.length}</strong></p>
+                        <p><strong>Успешность теста:{Math.floor((correctAnswers / questions.length) * 100)}%</strong></p>
+                        
+
                     </Modal>
                 </form>
             </div>

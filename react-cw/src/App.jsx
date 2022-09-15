@@ -6,11 +6,7 @@ import { QuestionList } from './components/QuestionList';
 function App() {
   return (
     <div className="App">
-
-
-        
         <Routes>
-
         <Route path="/" element={<InitialPage/>}/>
         <Route path="/questions" element={<QuestionList/>}/>
         </Routes>
