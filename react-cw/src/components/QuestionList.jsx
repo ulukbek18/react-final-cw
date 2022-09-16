@@ -6,30 +6,33 @@ import './QuestionList.css'
 import 'antd/dist/antd.css';
 
 import { Col, Row, Statistic } from 'antd';
+import { QuestionItem } from './QuestionItem';
+import { Timer } from './Timer';
 
-const { Countdown } = Statistic;
 
 
 
 
 export const QuestionList = () => {
-    const deadline = Date.now() + 1000 * 30; // Moment is also OK
+
+    const deadline = Date.now() + 1000 * 30;
     const questions = useSelector(store => store.questions)
     const username = useSelector((store) => store.username)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [values, setValues] = useState({});
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [timeOut, setTimeOut] = useState(null);
-    
+
 
     const newUserName = Object.values(username)
-    
+
 
     const onTimerFinish = () => {
         console.log('finished!');
         showModal()
         setTimeOut(true)
     };
+
 
 
     const calculateResults = () => {
@@ -44,7 +47,7 @@ export const QuestionList = () => {
         setCorrectAnswers(correct)
         console.log(correct)
     }
-    
+
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
@@ -70,66 +73,62 @@ export const QuestionList = () => {
         setIsModalOpen(false);
     };
 
+
+
     console.log('questions', questions)
-    const title = timeOut? 'Ваше время истекло' : 'Результат'
+    const title = timeOut ? 'Ваше время истекло' : 'Результат'
+
+
+
+
     console.log('render')
     return (
         <div>
-            <div>
-                <Row gutter={16}>
-                    <Col span={12}>
-                        <Countdown title="Время до завершения теста" value={deadline} onFinish={onTimerFinish} />
-                    </Col>
-                </Row>
-            </div>
+
             <div className='wrapper-upper'>
-            <span  >Ответов на вопрос может быть больше чем один</span>
+                <span  >Ответов на вопрос может быть больше чем один</span>
             </div>
+
+
+
+
+
+
+
+
+            <div>
+                <Timer
+                    onTimerFinish={onTimerFinish}
+                    deadline={deadline}
+                />
+            </div>
+
+
+
+
+
+
+
             <div>
                 <form onSubmit={handleSubmit} >
                     {questions.map(question => {
-                        return question.multiple ?
+                        return (
+                            <QuestionItem
+                                question={question}
+                                handleChange={handleChange}
+                                isMultiple={question.multiple} />
 
-                            <div key={question.id} className='wrapper'>
-                                <h2 className='question-text'>{question.question}</h2>
-                                <div className='input-wrapper'>
-                                    <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[0].correct}></input>
-                                    <label  className='answer-text'htmlFor="html"><b >Option 1:</b>   {question.answers[0].answer}</label>
+                        )
 
-                                    <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[1].correct} />
-                                    <label className='answer-text' htmlFor="css"><b>Option 2:</b>   {question.answers[1].answer}</label>
-
-                                    <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[2].correct} />
-                                    <label className='answer-text' htmlFor="javascript"><b>Option 3:</b>   {question.answers[2].answer}</label>
-
-                                    <input onChange={handleChange} type="checkbox" id={question.id} name={question.id} value={question.answers[3].correct} />
-                                    <label className='answer-text' htmlFor="javascript"><b>Option 4:</b>   {question.answers[3].answer}</label>
-                                </div>
-                            </div>
-                            :
-                            <div key={question.id} className='wrapper'>
-                                <h2 className='question-text'>{question.question}</h2>
-                                <div className='input-wrapper'>
-                                    <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[0].correct}></input>
-                                    <label className='answer-text' htmlFor="html"><b>Option 1:</b>   {question.answers[0].answer}</label>
-
-                                    <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[1].correct} />
-                                    <label className='answer-text' htmlFor="css"><b>Option 2:</b>   {question.answers[1].answer}</label>
-
-                                    <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[2].correct} />
-                                    <label className='answer-text' htmlFor="javascript"><b>Option 3:</b>   {question.answers[2].answer}</label>
-
-                                    <input onChange={handleChange} type="radio" id={question.id} name={question.id} value={question.answers[3].correct} />
-                                    <label className='answer-text' htmlFor="javascript"><b>Option 4:</b>   {question.answers[3].answer}</label>
-                                </div>
-                            </div>
                     })}
                     <button className='button' type="submit" onClick={showModal}>Завершить тест</button>
 
                     <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                        <p>Уважаемый: <b>{newUserName}</b></p>
-                        <p>Ваш результат:{correctAnswers} из {questions.length}</p>
-                        <p>Успешность теста:{Math.floor((correctAnswers / questions.length) * 100)}%</p>
+                        <p><strong>Уважаемый: {newUserName}</strong></p>
+                        <p><strong>Ваш результат:{correctAnswers} из {questions.length}</strong></p>
+                        <p><strong>Успешность теста:{Math.floor((correctAnswers / questions.length) * 100)}%</strong></p>
+
+
                     </Modal>
                 </form>
             </div>
