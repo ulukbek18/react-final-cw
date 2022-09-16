@@ -30,6 +30,9 @@ const InitialPage = () => {
     navigate('/questions')
     
   }
+  const handleCreateClick =(e)=>{
+    navigate('/createquestions')
+  }
  
 
   return (
@@ -77,6 +80,9 @@ const InitialPage = () => {
         <Button  type="primary" htmlType="submit"  >
           Начать тест
         </Button>
+        <div>
+            <button onClick={handleCreateClick}>  Создать тест</button>
+        </div>
 
         </div>
       </Form.Item>
